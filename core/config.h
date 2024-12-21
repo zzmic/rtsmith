@@ -13,7 +13,7 @@ class FuzzerConfig {
  private:
     /// The maximum number of entries we are trying to generate for a table.
     int maxEntryGenCnt = 5;
-    // The maximum attempts we are trying to generate an entry.
+    /// The maximum attempts we are trying to generate an entry.
     int maxAttempts = 100;
     /// The maximum number of tables.
     int maxTables = 5;
@@ -27,6 +27,21 @@ class FuzzerConfig {
     uint64_t maxUpdateTimeInMicroseconds = 100000;
     /// The minimum time (in microseconds) for the update.
     uint64_t minUpdateTimeInMicroseconds = 50000;
+    /* BNG-related configurations. */
+    /// The maximum number of subscribers.
+    int maxSubscribers = 1000;
+    /// The maximum number of routers.
+    int maxRouters = 100;
+    /// The maximum number of control-plane entries.
+    int maxControlPlaneEntries = 100;
+    /// Whether to enable VLAN tagging.
+    bool enableVLANTagging = false;
+    /// Whether to enable MPLS label stacking.
+    bool enableMPLSLabelStacking = false;
+    /// Whether to enable PPPoE.
+    bool enablePPPoE = false;
+    /// The threshold for triggering control-plane signaling.
+    uint64_t thresholdForControlPlaneSignaling = 50;
 
  public:
     // Default constructor.
@@ -48,6 +63,15 @@ class FuzzerConfig {
     [[nodiscard]] uint64_t getMinUpdateTimeInMicroseconds() const {
         return minUpdateTimeInMicroseconds;
     }
+    [[nodiscard]] int getMaxSubscribers() const { return maxSubscribers; }
+    [[nodiscard]] int getMaxRouters() const { return maxRouters; }
+    [[nodiscard]] int getMaxControlPlaneEntries() const { return maxControlPlaneEntries; }
+    [[nodiscard]] bool getEnableVLANTagging() const { return enableVLANTagging; }
+    [[nodiscard]] bool getEnableMPLSLabelStacking() const { return enableMPLSLabelStacking; }
+    [[nodiscard]] bool getEnablePPPoE() const { return enablePPPoE; }
+    [[nodiscard]] uint64_t getThresholdForControlPlaneSignaling() const {
+        return thresholdForControlPlaneSignaling;
+    }
 
     /// Setters to modify/override the fuzzer configurations.
     void setMaxEntryGenCnt(const int numEntries);
@@ -58,6 +82,13 @@ class FuzzerConfig {
     void setMaxUpdateCount(const size_t count);
     void setMaxUpdateTimeInMicroseconds(const uint64_t micros);
     void setMinUpdateTimeInMicroseconds(const uint64_t micros);
+    void setMaxSubscribers(const int numSubscribers);
+    void setMaxRouters(const int numRouters);
+    void setMaxControlPlaneEntries(const int numEntries);
+    void setEnableVLANTagging(const bool enable);
+    void setEnableMPLSLabelStacking(const bool enable);
+    void setEnablePPPoE(const bool enable);
+    void setThresholdForControlPlaneSignaling(const uint64_t threshold);
 };
 
 }  // namespace P4::P4Tools::RtSmith

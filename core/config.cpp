@@ -50,4 +50,36 @@ void FuzzerConfig::setMinUpdateTimeInMicroseconds(const uint64_t micros) {
     minUpdateTimeInMicroseconds = micros;
 }
 
+void FuzzerConfig::setMaxSubscribers(const int numSubscribers) {
+    if (numSubscribers < 0) {
+        error("ControlPlaneSmith: The maximum number of subscribers must be a non-negative integer.");
+    }
+    maxSubscribers = numSubscribers;
+}
+
+void FuzzerConfig::setMaxRouters(const int numRouters) {
+    if (numRouters < 0) {
+        error("ControlPlaneSmith: The maximum number of routers must be a non-negative integer.");
+    }
+    maxRouters = numRouters;
+}
+
+void FuzzerConfig::setMaxControlPlaneEntries(const int numEntries) {
+    if (numEntries < 0) {
+        error(
+            "ControlPlaneSmith: The maximum number of control-plane entries must be a non-negative "
+            "integer.");
+    }
+    maxControlPlaneEntries = numEntries;
+}
+
+void FuzzerConfig::setEnableVLANTagging(const bool enable) { enableVLANTagging = enable; }
+
+void FuzzerConfig::setEnableMPLSLabelStacking(const bool enable) { enableMPLSLabelStacking = enable; }
+
+void FuzzerConfig::setEnablePPPoE(const bool enable) { enablePPPoE = enable; }
+
+void FuzzerConfig::setThresholdForControlPlaneSignaling(const uint64_t threshold) {
+    thresholdForControlPlaneSignaling = threshold;
+}
 }  // namespace P4::P4Tools::RtSmith
